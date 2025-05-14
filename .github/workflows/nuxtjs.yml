@@ -16,13 +16,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*' # Use the latest LTS version of Node.js
+          node-version: '20.x' # Using a specific recent LTS version
+
+      - name: Clear npm cache
+        run: npm cache clean --force
 
       - name: Install dependencies
-        run: |
-          npm install
-          # or yarn install
-          # or pnpm install
+        run: npm install
 
       - name: Build Nuxt.js application
         run: npx nuxt build --preset github_pages
@@ -31,4 +31,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: .output/public # Nuxt 3's output directory for static sites
+          folder: .output/public
